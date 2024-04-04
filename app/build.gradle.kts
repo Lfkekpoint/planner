@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -48,6 +49,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core:puerh"))
+
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -56,7 +60,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
     implementation(libs.cicerone)
+    implementation (libs.toothpick.ktp)
+    implementation(libs.androidx.navigation.common.ktx)
+    kapt(libs.toothpick.compiler)
 
     testImplementation(libs.junit)
 
