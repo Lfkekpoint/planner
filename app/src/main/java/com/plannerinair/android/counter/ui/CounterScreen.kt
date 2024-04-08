@@ -1,53 +1,52 @@
 package com.plannerinair.android.counter.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Icon
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
-import com.plannerinair.android.counter.logic.CounterFeature
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.plannerinair.android.R
 
 @Composable
 fun CounterScreen(
-    counterState: CounterFeature.State,
-    modifier: Modifier,
-    listener: (CounterFeature.Msg) -> Unit
+    modifier: Modifier
 ) {
-    Column(modifier = Modifier.padding(Dp(16f))) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Button(onClick = { listener(CounterFeature.Msg.OnCounterChange(1)) }) {
-                Text("Increase")
-            }
-            Text(text = counterState.counter.toString())
-            Button(onClick = {
-                listener(CounterFeature.Msg.OnCounterChange(-1))
-            }) {
-                Text("Decrease")
-            }
+    LazyColumn(modifier = modifier.padding(16.dp)) {
+        items(10) { index ->
+            NotePreviewItem()
         }
-        Spacer(modifier = Modifier.height(Dp(16f)))
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Button(onClick = {
-                listener(CounterFeature.Msg.OnRandomClick)
-            }) {
-                if (counterState.progress != null) {
-                    CircularProgressIndicator(
-                        progress = counterState.progress / 100f,
-                        Modifier.size(Dp(16f)),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                } else {
-                    Text("Random")
-                }
-            }
-        }
+    }
+}
+
+@Preview
+@Composable
+private fun NotePreviewItem(
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth().background(Color.White),
+    ) {
+        Icon(painterResource(id = R.drawable.ic_featured_play_list), contentDescription = null)
+        TextField(
+            value = "My new note",
+            onValueChange = {},
+            modifier = Modifier.background(Color.White),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                focusedIndicatorColor = Color.White,
+                unfocusedIndicatorColor = Color.White
+            )
+        )
+        Icon(painterResource(id = R.drawable.ic_arrow_left), contentDescription = null)
     }
 }

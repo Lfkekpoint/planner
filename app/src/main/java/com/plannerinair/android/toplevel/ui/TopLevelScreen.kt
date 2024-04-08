@@ -1,8 +1,6 @@
 package com.plannerinair.android.toplevel.ui
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -52,9 +50,9 @@ fun TopLevelScreen(
 ) { innerPadding  ->
      when (val screen = state.currentScreen) {
         is ScreenState.Counter -> {
-            CounterScreen(modifier = Modifier.padding(innerPadding),
-                counterState = screen.state
-            ) { listener(TopLevelFeature.Msg.CounterMsg(it)) }
+            CounterScreen(
+                modifier = Modifier.padding(innerPadding)
+            )
         }
         is ScreenState.Backstack -> {
             BackstackScreen(
