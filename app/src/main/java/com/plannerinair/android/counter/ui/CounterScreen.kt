@@ -11,34 +11,37 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.plannerinair.android.R
+import com.plannerinair.android.counter.logic.CounterFeature
+import java.lang.StringBuilder
 
 @Composable
 fun CounterScreen(
-    modifier: Modifier
+    modifier: Modifier,
+    state: CounterFeature.State,
+    listener: (CounterFeature.Msg) -> Unit
 ) {
     LazyColumn(modifier = modifier.padding(16.dp)) {
-        items(10) { index ->
-            NotePreviewItem()
+        items(state.notes.size) { index ->
+            NotePreviewItem(listener, index, state.notes[index])
         }
     }
 }
 
-@Preview
 @Composable
-private fun NotePreviewItem(
-) {
+private fun NotePreviewItem(listener: (CounterFeature.Msg) -> Unit, index: Int, noteText: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth().background(Color.White),
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White),
     ) {
         Icon(painterResource(id = R.drawable.ic_featured_play_list), contentDescription = null)
         TextField(
-            value = "My new note",
-            onValueChange = {},
+            value = noteText,
+            onValueChange = { listener(CounterFeature.Msg.OnTextNoteChange(it, index)) },
             modifier = Modifier.background(Color.White),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White,

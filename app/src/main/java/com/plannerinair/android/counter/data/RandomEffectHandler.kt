@@ -11,9 +11,9 @@ fun ExecutorService.randomEffectInterpreter(
     is CounterFeature.Eff.GenerateRandomCounterChange -> submit {
         for (i in 1..100) {
             Thread.sleep(10)
-            listener(CounterFeature.Msg.OnProgressPublish(i))
+//            listener(CounterFeature.Msg.OnProgressPublish(i))
         }
         val value = Random.nextInt(100) - 50
-        listener(CounterFeature.Msg.OnCounterChange(value))
+//        listener(CounterFeature.Msg.OnCounterChange(value))
     }
 }

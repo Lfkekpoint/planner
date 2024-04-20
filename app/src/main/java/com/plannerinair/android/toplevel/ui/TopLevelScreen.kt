@@ -51,8 +51,9 @@ fun TopLevelScreen(
      when (val screen = state.currentScreen) {
         is ScreenState.Counter -> {
             CounterScreen(
-                modifier = Modifier.padding(innerPadding)
-            )
+                modifier = Modifier.padding(innerPadding),
+                state = screen.state
+            ) { listener(TopLevelFeature.Msg.CounterMsg(it)) }
         }
         is ScreenState.Backstack -> {
             BackstackScreen(
