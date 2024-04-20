@@ -1,4 +1,4 @@
-package com.plannerinair.android.counter.ui
+package com.plannerinair.android.notes.preview.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,14 +13,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.plannerinair.android.R
-import com.plannerinair.android.counter.logic.CounterFeature
-import java.lang.StringBuilder
+import com.plannerinair.android.notes.preview.logic.NotesPreviewFeature
 
 @Composable
-fun CounterScreen(
+fun NotesScreen(
     modifier: Modifier,
-    state: CounterFeature.State,
-    listener: (CounterFeature.Msg) -> Unit
+    state: NotesPreviewFeature.State,
+    listener: (NotesPreviewFeature.Msg) -> Unit
 ) {
     LazyColumn(modifier = modifier.padding(16.dp)) {
         items(state.notes.size) { index ->
@@ -30,7 +29,7 @@ fun CounterScreen(
 }
 
 @Composable
-private fun NotePreviewItem(listener: (CounterFeature.Msg) -> Unit, index: Int, noteText: String) {
+private fun NotePreviewItem(listener: (NotesPreviewFeature.Msg) -> Unit, index: Int, noteText: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -41,7 +40,7 @@ private fun NotePreviewItem(listener: (CounterFeature.Msg) -> Unit, index: Int, 
         Icon(painterResource(id = R.drawable.ic_featured_play_list), contentDescription = null)
         TextField(
             value = noteText,
-            onValueChange = { listener(CounterFeature.Msg.OnTextNoteChange(it, index)) },
+            onValueChange = { listener(NotesPreviewFeature.Msg.OnTextNoteChange(it, index)) },
             modifier = Modifier.background(Color.White),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White,

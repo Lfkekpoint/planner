@@ -1,15 +1,13 @@
-package com.plannerinair.android.counter.logic
+package com.plannerinair.android.notes.preview.logic
 
-import com.plannerinair.android.counter.logic.CounterFeature.onTextChange
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.immutableListOf
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 
-typealias ReducerResult = Pair<CounterFeature.State, Set<CounterFeature.Eff>>
+typealias ReducerResult = Pair<NotesPreviewFeature.State, Set<NotesPreviewFeature.Eff>>
 
-object CounterFeature {
-    fun initialState(): State = State(persistentListOf("one", "two", "three", "four", "five"))
+object NotesPreviewFeature {
+    fun initialState(): State = State(persistentListOf())
 
     fun initialEffects(): Set<Eff> = setOf(Eff.GenerateRandomCounterChange)
 

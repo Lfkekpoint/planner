@@ -1,7 +1,7 @@
 package com.plannerinair.android.toplevel.logic
 
 import com.plannerinair.android.backstack.logic.BackstackFeature
-import com.plannerinair.android.counter.logic.CounterFeature
+import com.plannerinair.android.notes.preview.logic.NotesPreviewFeature
 import com.plannerinair.android.toplevel.logic.TopLevelFeature.State.ScreenState.*
 import com.plannerinair.android.translate.logic.TranslateFeature
 
@@ -12,7 +12,7 @@ object TopLevelFeature {
         backstackFeatureState: BackstackFeature.State
     ): State = State(
         screens = listOf(
-            Counter(CounterFeature.initialState()),
+            Counter(NotesPreviewFeature.initialState()),
             Backstack(backstackFeatureState),
             Translate(TranslateFeature.initialState())
         ),
@@ -20,7 +20,7 @@ object TopLevelFeature {
     )
 
     fun initialEffects(): Set<Eff> =
-        CounterFeature.initialEffects().mapTo(HashSet(), Eff::CounterEff)
+        NotesPreviewFeature.initialEffects().mapTo(HashSet(), Eff::CounterEff)
 
     data class State(
         val screens: List<ScreenState>,
@@ -38,7 +38,7 @@ object TopLevelFeature {
 
         sealed class ScreenState {
             data class Counter(
-                val state: CounterFeature.State
+                val state: NotesPreviewFeature.State
             ) : ScreenState()
 
             data class Backstack(
@@ -52,7 +52,7 @@ object TopLevelFeature {
     }
 
     sealed class Msg {
-        data class CounterMsg(val msg: CounterFeature.Msg) : Msg()
+        data class CounterMsg(val msg: NotesPreviewFeature.Msg) : Msg()
         data class BackstackMsg(val msg: BackstackFeature.Msg) : Msg()
         data class TranslateMsg(val msg: TranslateFeature.Msg) : Msg()
         object OnBackstackScreenSwitch : Msg()
@@ -63,7 +63,7 @@ object TopLevelFeature {
 
     sealed class Eff {
         object Finish : Eff()
-        data class CounterEff(val eff: CounterFeature.Eff) : Eff()
+        data class CounterEff(val eff: NotesPreviewFeature.Eff) : Eff()
         data class BackstackEff(val eff: BackstackFeature.Eff) : Eff()
         data class TranslateEff(val eff: TranslateFeature.Eff) : Eff()
     }
@@ -115,10 +115,10 @@ object TopLevelFeature {
 
     private fun reduceCounter(
         currentScreen: Counter,
-        msg: CounterFeature.Msg,
+        msg: NotesPreviewFeature.Msg,
         state: State
     ): ReducerResult {
-        val (newScreenState, effs) = CounterFeature.reducer(msg, currentScreen.state)
+        val (newScreenState, effs) = NotesPreviewFeature.reducer(msg, currentScreen.state)
         val newEffs = effs.mapTo(HashSet(), Eff::CounterEff)
         return state.changeCurrentScreen<Counter> { copy(state = newScreenState) } to newEffs
     }

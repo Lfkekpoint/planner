@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import com.plannerinair.android.backstack.logic.BackstackFeature
 import com.plannerinair.android.backstack.logic.SCREEN_NAMES
-import com.plannerinair.android.counter.data.randomEffectInterpreter
+import com.plannerinair.android.notes.preview.data.randomEffectInterpreter
 import com.plannerinair.android.toplevel.logic.TopLevelFeature
 import com.plannerinair.android.translate.data.TranslationApiEffectHandler
 import com.plannerinair.puerh.ExecutorEffectHandler

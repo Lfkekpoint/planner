@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.plannerinair.android.R
 import com.plannerinair.android.backstack.ui.BackstackScreen
-import com.plannerinair.android.counter.ui.CounterScreen
+import com.plannerinair.android.notes.preview.ui.NotesScreen
 import com.plannerinair.android.toplevel.logic.TopLevelFeature
 import com.plannerinair.android.toplevel.logic.TopLevelFeature.State.ScreenState
 import com.plannerinair.android.translate.ui.TranslateScreen
@@ -50,7 +50,7 @@ fun TopLevelScreen(
 ) { innerPadding  ->
      when (val screen = state.currentScreen) {
         is ScreenState.Counter -> {
-            CounterScreen(
+            NotesScreen(
                 modifier = Modifier.padding(innerPadding),
                 state = screen.state
             ) { listener(TopLevelFeature.Msg.CounterMsg(it)) }
