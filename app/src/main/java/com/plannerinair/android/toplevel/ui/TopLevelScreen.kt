@@ -10,11 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.plannerinair.android.R
-import com.plannerinair.android.backstack.ui.BackstackScreen
 import com.plannerinair.android.notes.preview.ui.NotesScreen
 import com.plannerinair.android.toplevel.logic.TopLevelFeature
 import com.plannerinair.android.toplevel.logic.TopLevelFeature.State.ScreenState
-import com.plannerinair.android.translate.ui.TranslateScreen
 
 private val bottomItems = listOf(
     "Counter" to R.drawable.ic_baseline_counter_24,
@@ -38,9 +36,7 @@ fun TopLevelScreen(
                     selected = selectedIndex == index,
                     onClick = {
                         when (index) {
-                            0 -> listener(TopLevelFeature.Msg.OnCounterScreenSwitch)
-                            1 -> listener(TopLevelFeature.Msg.OnBackstackScreenSwitch)
-                            2 -> listener(TopLevelFeature.Msg.OnTranslateScreenSwitch)
+                            0 -> listener(TopLevelFeature.Msg.OnNotesScreenSwitch)
                         }
                     }
                 )
@@ -54,16 +50,6 @@ fun TopLevelScreen(
                 modifier = Modifier.padding(innerPadding),
                 state = screen.state
             ) { listener(TopLevelFeature.Msg.CounterMsg(it)) }
-        }
-        is ScreenState.Backstack -> {
-            BackstackScreen(
-                screen.state
-            ) { listener(TopLevelFeature.Msg.BackstackMsg(it)) }
-        }
-        is ScreenState.Translate -> {
-            TranslateScreen(
-                screen.state
-            ) { listener(TopLevelFeature.Msg.TranslateMsg(it)) }
         }
     }
 }

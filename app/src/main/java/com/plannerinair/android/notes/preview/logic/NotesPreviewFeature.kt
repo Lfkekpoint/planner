@@ -9,8 +9,6 @@ typealias ReducerResult = Pair<NotesPreviewFeature.State, Set<NotesPreviewFeatur
 object NotesPreviewFeature {
     fun initialState(): State = State(persistentListOf())
 
-    fun initialEffects(): Set<Eff> = setOf(Eff.GenerateRandomCounterChange)
-
     data class State(val notes: ImmutableList<String>)
 
     sealed class Msg {
@@ -18,7 +16,6 @@ object NotesPreviewFeature {
     }
 
     sealed class Eff {
-        object GenerateRandomCounterChange : Eff()
     }
 
     fun reducer(msg: Msg, state: State): ReducerResult = when (msg) {
