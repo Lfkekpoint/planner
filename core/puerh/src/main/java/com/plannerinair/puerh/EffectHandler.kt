@@ -27,7 +27,7 @@ fun <Msg : Any, State : Any, Eff : Any> Feature<Msg, State, Eff>.wrapWithEffectH
         this@wrapWithEffectHandler.cancel()
     }
 }.apply {
-    effectHandler.setListener { msg -> accept(msg) }
+    effectHandler.setListener { msg -> command(msg) }
     listenEffect { eff ->
         effectHandler.handleEffect(eff)
     }

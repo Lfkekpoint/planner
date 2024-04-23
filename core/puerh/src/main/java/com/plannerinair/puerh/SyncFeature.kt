@@ -12,7 +12,7 @@ class SyncFeature<Msg : Any, Model : Any, Eff : Any>(
     private val stateListeners = mutableListOf<(state: Model) -> Unit>()
     private val effListeners = mutableListOf<(eff: Eff) -> Unit>()
 
-    override fun accept(msg: Msg) {
+    override fun command(msg: Msg) {
         if (isCanceled) return
         val (newState, commands) = reducer(msg, currentState)
         currentState = newState

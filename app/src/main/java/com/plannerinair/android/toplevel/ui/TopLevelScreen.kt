@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.plannerinair.android.R
-import com.plannerinair.android.notes.preview.ui.NotesScreen
+import com.plannerinair.android.notes.preview.ui.NotesPreviewScreen
 import com.plannerinair.android.toplevel.logic.TopLevelFeature
 import com.plannerinair.android.toplevel.logic.TopLevelFeature.State.ScreenState
 
@@ -45,11 +45,11 @@ fun TopLevelScreen(
     }
 ) { innerPadding  ->
      when (val screen = state.currentScreen) {
-        is ScreenState.Counter -> {
-            NotesScreen(
+        is ScreenState.Notes -> {
+            NotesPreviewScreen(
                 modifier = Modifier.padding(innerPadding),
                 state = screen.state
-            ) { listener(TopLevelFeature.Msg.CounterMsg(it)) }
+            ) { listener(TopLevelFeature.Msg.Notes(it)) }
         }
     }
 }

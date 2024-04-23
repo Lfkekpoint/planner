@@ -7,8 +7,7 @@ import com.plannerinair.puerh.SyncFeature
 
 fun provideFeature(applicationContext: Context): Feature<TopLevelFeature.Msg, TopLevelFeature.State, TopLevelFeature.Eff> {
     return SyncFeature(
-        TopLevelFeature.initialState(
-        ),
-        TopLevelFeature::reducer
+        initialState = TopLevelFeature.initialState(),
+        reducer = TopLevelFeature::reducer
     )
 }

@@ -16,7 +16,7 @@ import com.plannerinair.android.R
 import com.plannerinair.android.notes.preview.logic.NotesPreviewFeature
 
 @Composable
-fun NotesScreen(
+fun NotesPreviewScreen(
     modifier: Modifier,
     state: NotesPreviewFeature.State,
     listener: (NotesPreviewFeature.Msg) -> Unit

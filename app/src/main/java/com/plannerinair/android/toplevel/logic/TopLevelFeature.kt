@@ -9,7 +9,7 @@ object TopLevelFeature {
     fun initialState(
     ): State = State(
         screens = listOf(
-            Counter(NotesPreviewFeature.initialState()),
+            Notes(NotesPreviewFeature.initialState()),
         ),
         currentScreenPos = 0
     )
@@ -29,14 +29,14 @@ object TopLevelFeature {
         }
 
         sealed class ScreenState {
-            data class Counter(
+            data class Notes(
                 val state: NotesPreviewFeature.State
             ) : ScreenState()
         }
     }
 
     sealed class Msg {
-        data class CounterMsg(val msg: NotesPreviewFeature.Msg) : Msg()
+        data class Notes(val msg: NotesPreviewFeature.Msg) : Msg()
         data object OnNotesScreenSwitch : Msg()
         data object OnBack : Msg()
     }
@@ -47,8 +47,8 @@ object TopLevelFeature {
     }
 
     fun reducer(msg: Msg, state: State): ReducerResult = when (state.currentScreen) {
-        is Counter -> when (msg) {
-            is Msg.CounterMsg -> {
+        is Notes -> when (msg) {
+            is Msg.Notes -> {
                 reduceCounter(state.currentScreen, msg.msg, state)
             }
             is Msg.OnBack -> {
@@ -59,12 +59,12 @@ object TopLevelFeature {
     }
 
     private fun reduceCounter(
-        currentScreen: Counter,
+        currentScreen: Notes,
         msg: NotesPreviewFeature.Msg,
         state: State
     ): ReducerResult {
         val (newScreenState, effs) = NotesPreviewFeature.reducer(msg, currentScreen.state)
         val newEffs = effs.mapTo(HashSet(), Eff::CounterEff)
-        return state.changeCurrentScreen<Counter> { copy(state = newScreenState) } to newEffs
+        return state.changeCurrentScreen<Notes> { copy(state = newScreenState) } to newEffs
     }
 }
