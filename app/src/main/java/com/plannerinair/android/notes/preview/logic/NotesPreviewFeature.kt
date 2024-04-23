@@ -7,7 +7,7 @@ import kotlinx.collections.immutable.toImmutableList
 typealias ReducerResult = Pair<NotesPreviewFeature.State, Set<NotesPreviewFeature.Eff>>
 
 object NotesPreviewFeature {
-    fun initialState(): State = State(persistentListOf())
+    fun initialState(): State = State(persistentListOf("first", "two", "three"))
 
     data class State(val notes: ImmutableList<String>)
 
